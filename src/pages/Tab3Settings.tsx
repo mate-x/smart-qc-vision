@@ -57,7 +57,7 @@ export default function Tab3Settings() {
       <div className="mt-6 pt-6 border-t border-gray-200">
         <p className="text-sm font-semibold text-gray-700 mb-1">이미지 소스 경로</p>
         <p className="text-xs text-gray-400 mb-2">
-          비우면 선택한 모델의 학습 데이터셋 경로를 사용합니다. 현재: {activeModel?.dataset_path ?? '—'}
+          경로를 직접 지정하지 않으면 선택한 모델의 학습 데이터셋 경로를 사용합니다. 현재: {activeModel?.dataset_path ?? '—'}
         </p>
         <div className="flex gap-2">
           <input
