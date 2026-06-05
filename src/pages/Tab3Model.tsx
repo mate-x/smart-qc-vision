@@ -25,7 +25,7 @@ export default function Tab3Model() {
   return (
     <div>
       <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#111827', marginBottom: '16px' }}>
-        모델 교체
+        {activeModel ? '모델 교체' : '모델 선택'}
       </h2>
 
       <ModelTable

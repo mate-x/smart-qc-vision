@@ -39,12 +39,12 @@ export function ModelTable({
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr>
+            <th style={{ ...thStyle, textAlign: 'center', width: '40px' }}></th>
             <th style={thStyle}>실험명</th>
             <th style={thStyle}>모델타입</th>
             <th style={thStyle}>F1</th>
             <th style={thStyle}>AUC</th>
             <th style={thStyle}>실행시각</th>
-            <th style={{ ...thStyle, textAlign: 'center' }}>상태</th>
           </tr>
         </thead>
         <tbody>

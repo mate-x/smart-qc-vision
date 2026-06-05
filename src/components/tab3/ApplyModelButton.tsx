@@ -52,7 +52,7 @@ export function ApplyModelButton({
           transition: 'background-color 0.15s',
         }}
       >
-        {isLoading ? '적용 중...' : '✅ 이 모델로 검사 시작'}
+        {isLoading ? '적용 중...' : '모델 적용'}
       </button>
 
       {error && (
