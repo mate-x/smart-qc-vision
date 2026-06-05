@@ -17,7 +17,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Tab1Realtime />} />
           <Route path="/history" element={<Tab2History />} />
-          <Route path="/models" element={<Tab3Model />} />
+          <Route path="/settings" element={<Tab3Model />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

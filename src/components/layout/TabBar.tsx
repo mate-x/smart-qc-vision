@@ -4,7 +4,7 @@ import { ModelStatusChip } from './ModelStatusChip';
 const TABS = [
   { path: '/', label: '실시간 검사' },
   { path: '/history', label: '검사 이력' },
-  { path: '/models', label: '⚙️설정' },
+  { path: '/settings', label: '⚙️설정' },
 ];
 
 export function TabBar() {
