@@ -21,6 +21,7 @@ export interface ExperimentRecord {
 
 export interface ActiveModel {
   experiment_id: string;
+  name: string;
   model_path: string;
   model_type: string;
   threshold: number;

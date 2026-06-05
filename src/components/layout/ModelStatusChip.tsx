@@ -13,10 +13,9 @@ export function ModelStatusChip() {
     return <span className={chipClass}>모델 미선택</span>;
   }
 
-  const shortId = activeModel.experiment_id.slice(0, 8);
   return (
     <span className={chipClass}>
-      모델: {activeModel.model_type} / {shortId}
+      모델: {activeModel.name} / {activeModel.model_type}
     </span>
   );
 }
