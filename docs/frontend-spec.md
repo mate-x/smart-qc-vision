@@ -39,7 +39,7 @@ smart-qc-vision/
     ├── pages/                      ← 라우트와 1:1 대응하는 최상위 페이지
     │   ├── Tab1Realtime.tsx        ← 실시간 검사
     │   ├── Tab2History.tsx         ← 검사 이력
-    │   └── Tab3Model.tsx           ← 모델 교체
+    │   └── Tab3Setting.tsx           ← 검사 설정
     │
     ├── components/
     │   ├── layout/
@@ -121,7 +121,7 @@ smart-qc-vision/
 |------|----------|------|
 | `/` | `Tab1Realtime` | 실시간 검사 (기본 화면) |
 | `/history` | `Tab2History` | 검사 이력 |
-| `/models` | `Tab3Model` | 모델 교체 |
+| `/settings` | `Tab3Settings` | 검사 설정 |
 
 ```tsx
 // src/main.tsx
@@ -137,7 +137,7 @@ smart-qc-vision/
     <Routes>
       <Route path="/"        element={<Tab1Realtime />} />
       <Route path="/history" element={<Tab2History />} />
-      <Route path="/models"  element={<Tab3Model />} />
+      <Route path="/settings"  element={<Tab3Settings />} />
       <Route path="*"        element={<Navigate to="/" replace />} />
     </Routes>
   </main>
@@ -645,10 +645,10 @@ Tab2History
   └── "초기화"  → clearRecords() → 다이얼로그 닫기
 ```
 
-### 탭3 — 모델 교체 (`Tab3Model.tsx`)
+### 탭3 — 검사 설정 (`Tab3Settings.tsx`)
 
 ```
-Tab3Model
+Tab3Settings
 │
 ├── <GpuWarningBanner>      gpuWarning !== null 시 표시 (탭 진입 시)
 │
@@ -787,7 +787,7 @@ function NoModelGuard({ children }: { children: ReactNode }) {
 적용 위치:
 - `Tab1Realtime` 전체를 `<NoModelGuard>`로 감쌈
 - `Tab2History` 전체를 `<NoModelGuard>`로 감쌈
-- `Tab3Model`은 guard 불필요 (모델 선택하는 탭이므로)
+- `Tab3Settings`은 guard 불필요 (모델 선택하는 탭이므로)
 
 ### 9-2. GPU 경고 배너
 

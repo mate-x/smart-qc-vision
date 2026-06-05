@@ -4,7 +4,7 @@ import { GpuWarningBanner } from './components/layout/GpuWarningBanner';
 import { useActiveModel } from './hooks/useActiveModel';
 import Tab1Realtime from './pages/Tab1Realtime';
 import Tab2History from './pages/Tab2History';
-import Tab3Model from './pages/Tab3Model';
+import Tab3Settings from './pages/Tab3Settings';
 
 export default function App() {
   useActiveModel();
@@ -17,7 +17,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Tab1Realtime />} />
           <Route path="/history" element={<Tab2History />} />
-          <Route path="/settings" element={<Tab3Model />} />
+          <Route path="/settings" element={<Tab3Settings />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

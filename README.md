@@ -94,7 +94,7 @@ src/
 ├── pages/
 │   ├── Tab1Realtime.tsx      # 실시간 검사 페이지
 │   ├── Tab2History.tsx       # 검사 이력 페이지
-│   └── Tab3Model.tsx         # 모델 교체 페이지
+│   └── Tab3Setting.tsx         # 검사 설정 페이지
 │
 ├── components/
 │   ├── layout/               # TabBar, ModelStatusChip, GpuWarningBanner, NoModelGuard

@@ -6,7 +6,7 @@ import { useUpdateSourcePath } from '../hooks/useUpdateSourcePath';
 import { ModelTable } from '../components/tab3/ModelTable';
 import { ApplyModelButton } from '../components/tab3/ApplyModelButton';
 
-export default function Tab3Model() {
+export default function Tab3Settings() {
   const activeModel = useInspectionStore((s) => s.activeModel);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [sourcePath, setSourcePath] = useState('');
@@ -37,7 +37,7 @@ export default function Tab3Model() {
     <div>
       <h2 className="text-lg font-bold text-gray-900 mb-4">검사 설정</h2>
 
-      <p className="text-sm font-semibold text-gray-700 mb-2">모델 선택</p>
+      <p className="text-sm font-semibold text-gray-700 mb-2">실험 선택</p>
       <ModelTable
         models={models}
         isLoading={modelsLoading}
