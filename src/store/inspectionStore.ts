@@ -21,6 +21,7 @@ interface InspectionState {
   clearHistory: () => void;
   showReshuffledToast: () => void;
   dismissReshuffledToast: () => void;
+  setActiveModelDatasetPath: (path: string) => void;
   setGpuWarning: (warning: string | null) => void;
 }
 
@@ -65,6 +66,13 @@ export const useInspectionStore = create<InspectionState>((set) => ({
   showReshuffledToast: () => set({ reshuffledToast: true }),
 
   dismissReshuffledToast: () => set({ reshuffledToast: false }),
+
+  setActiveModelDatasetPath: (path) =>
+    set((state) =>
+      state.activeModel
+        ? { activeModel: { ...state.activeModel, dataset_path: path } }
+        : {}
+    ),
 
   setGpuWarning: (warning) => set({ gpuWarning: warning }),
 }));

@@ -20,4 +20,10 @@ export const modelsApi = {
       .get<GetActiveModelResponse>('/api/inspection/model')
       .then((r) => r.data);
   },
+
+  updateSourcePath(sourcePath: string): Promise<{ success: boolean; source_path: string }> {
+    return apiClient
+      .patch('/api/inspection/source-path', { source_path: sourcePath })
+      .then((r) => r.data);
+  },
 };
