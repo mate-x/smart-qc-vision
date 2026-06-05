@@ -20,7 +20,7 @@ export function InspectionControls({
   const allDisabled = isLoading;
 
   return (
-    <div className="mb-4">
+    <div>
       <div className="flex gap-2.5 flex-wrap">
         <button
           onClick={onManual}

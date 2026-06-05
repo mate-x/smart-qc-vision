@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useInspectionStore } from '../store/inspectionStore';
 import { useManualInspection } from '../hooks/useManualInspection';
 import { useAutoInspection } from '../hooks/useAutoInspection';
@@ -6,7 +6,6 @@ import { useInspectionImages } from '../hooks/useInspectionImages';
 import { NoModelGuard } from '../components/layout/NoModelGuard';
 import { AutoRunningBanner } from '../components/tab1/AutoRunningBanner';
 import { InspectionControls } from '../components/tab1/InspectionControls';
-import { VerdictCard } from '../components/tab1/VerdictCard';
 import { ImagePanel } from '../components/tab1/ImagePanel';
 import { AnomalyMapPanel } from '../components/tab1/AnomalyMapPanel';
 import { OverlayPanel } from '../components/tab1/OverlayPanel';
@@ -16,6 +15,12 @@ export default function Tab1Realtime() {
   const { run: runManual, isLoading: isManualLoading, error: manualError } = useManualInspection();
   const { start, stop } = useAutoInspection();
   const { imageUrl, anomalyMapUrl, overlayUrl } = useInspectionImages();
+
+  const [imageRatio, setImageRatio] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!imageUrl) setImageRatio(null);
+  }, [imageUrl]);
 
   const isAutoRunning = useInspectionStore((s) => s.isAutoRunning);
   const lastResult = useInspectionStore((s) => s.lastResult);
@@ -32,22 +37,36 @@ export default function Tab1Realtime() {
 
   return (
     <NoModelGuard>
-      {isAutoRunning && <AutoRunningBanner />}
+      <div className="flex flex-col h-full">
+        {isAutoRunning && <AutoRunningBanner />}
 
-      <InspectionControls
-        isAutoRunning={isAutoRunning}
-        isLoading={isManualLoading}
-        error={manualError}
-        onManual={runManual}
-        onStart={start}
-        onStop={stop}
-      />
+        <div className="flex items-center justify-between mb-4 shrink-0">
+          <InspectionControls
+            isAutoRunning={isAutoRunning}
+            isLoading={isManualLoading}
+            error={manualError}
+            onManual={runManual}
+            onStart={start}
+            onStop={stop}
+          />
+          {lastResult && (
+            <div className={`flex items-center gap-2.5 px-4 py-2 rounded-full text-base font-bold shrink-0 border ${
+              lastResult.verdict === '양품'
+                ? 'bg-green-100 text-green-800 border-green-300'
+                : 'bg-red-100 text-red-800 border-red-300'
+            }`}>
+              <span>{lastResult.verdict === '양품' ? '✅' : '❌'}</span>
+              <span>{lastResult.verdict}</span>
+              <span className="text-sm font-normal opacity-60">{lastResult.anomaly_score.toFixed(4)}</span>
+            </div>
+          )}
+        </div>
 
-      <div className="grid grid-cols-[1fr_2fr_2fr_2fr] gap-4">
-        <VerdictCard result={lastResult} />
-        <ImagePanel url={imageUrl} label="원본 이미지" />
-        <AnomalyMapPanel url={anomalyMapUrl} />
-        <OverlayPanel url={overlayUrl} />
+        <div className="grid grid-cols-3 gap-4">
+          <ImagePanel url={imageUrl} label="원본 이미지" onRatioDetected={setImageRatio} aspectRatio={imageRatio} />
+          <AnomalyMapPanel url={anomalyMapUrl} aspectRatio={imageRatio} />
+          <OverlayPanel url={overlayUrl} aspectRatio={imageRatio} />
+        </div>
       </div>
 
       {defectStopped && (

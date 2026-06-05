@@ -13,7 +13,7 @@ export default function App() {
     <>
       <TabBar />
       <GpuWarningBanner />
-      <main style={{ flex: 1, padding: '24px' }}>
+      <main className="flex-1 min-h-0 overflow-hidden p-6">
         <Routes>
           <Route path="/" element={<Tab1Realtime />} />
           <Route path="/history" element={<Tab2History />} />
