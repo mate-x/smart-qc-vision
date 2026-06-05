@@ -27,7 +27,7 @@ export function InspectionControls({
           disabled={allDisabled || isAutoRunning}
           className={`${btnBase} bg-blue-600 text-white ${allDisabled || isAutoRunning ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         >
-          🔍 수동 검사 (1개 검사)
+          수동 검사 (1개 검사)
         </button>
 
         <button

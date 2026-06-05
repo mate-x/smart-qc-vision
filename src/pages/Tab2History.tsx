@@ -42,7 +42,7 @@ export default function Tab2History() {
               : 'bg-white text-gray-700 cursor-pointer'
           }`}
         >
-          📥 CSV 내보내기
+          CSV 내보내기
         </button>
       </div>
 
