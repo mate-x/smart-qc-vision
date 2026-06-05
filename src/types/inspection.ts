@@ -18,6 +18,15 @@ export interface InspectionRecord {
 
 export type VerdictFilter = '전체' | '양품' | '불량';
 
+export interface InspectionJobStarted {
+  job_id: string;
+}
+
+export type InspectionJobStatus =
+  | { status: 'pending' | 'running' }
+  | { status: 'completed'; result: InspectionResult }
+  | { status: 'failed'; error: string };
+
 export type WsMessage =
   | {
       type: 'result';

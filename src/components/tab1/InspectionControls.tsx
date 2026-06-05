@@ -73,6 +73,11 @@ export function InspectionControls({
         </button>
       </div>
 
+      {isLoading && (
+        <p style={{ marginTop: '8px', color: '#6b7280', fontSize: '13px' }}>
+          ⏳ 검사 중... 잠시 기다려 주세요
+        </p>
+      )}
       {error && (
         <p style={{ marginTop: '8px', color: '#dc2626', fontSize: '13px' }}>
           {error}

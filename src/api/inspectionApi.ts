@@ -1,9 +1,13 @@
 import { apiClient } from './client';
-import type { InspectionResult } from '../types/inspection';
+import type { InspectionJobStarted, InspectionJobStatus } from '../types/inspection';
 
 export const inspectionApi = {
-  runInspection(): Promise<InspectionResult> {
-    return apiClient.post<InspectionResult>('/api/inspection/run').then((r) => r.data);
+  startInspection(): Promise<InspectionJobStarted> {
+    return apiClient.post<InspectionJobStarted>('/api/inspection/run').then((r) => r.data);
+  },
+
+  getJobStatus(jobId: string): Promise<InspectionJobStatus> {
+    return apiClient.get<InspectionJobStatus>(`/api/inspection/job/${jobId}`).then((r) => r.data);
   },
 
   getImageUrl(stamp: number): string {
