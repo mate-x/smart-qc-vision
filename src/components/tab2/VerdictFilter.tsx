@@ -13,26 +13,16 @@ const OPTIONS: { value: VerdictFilter; label: string }[] = [
 
 export function VerdictFilterBar({ value, onChange }: Props) {
   return (
-    <div style={{ display: 'flex', gap: '20px', margin: '12px 0' }}>
+    <div className="flex gap-5 my-3">
       {OPTIONS.map((opt) => (
-        <label
-          key={opt.value}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            cursor: 'pointer',
-            fontSize: '14px',
-            color: '#374151',
-          }}
-        >
+        <label key={opt.value} className="flex items-center gap-1.5 cursor-pointer text-sm text-gray-700">
           <input
             type="radio"
             name="verdictFilter"
             value={opt.value}
             checked={value === opt.value}
             onChange={() => onChange(opt.value)}
-            style={{ cursor: 'pointer' }}
+            className="cursor-pointer"
           />
           {opt.label}
         </label>

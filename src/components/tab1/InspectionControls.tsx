@@ -7,15 +7,7 @@ interface Props {
   onStop: () => void;
 }
 
-const btnBase: React.CSSProperties = {
-  padding: '8px 18px',
-  borderRadius: '6px',
-  fontSize: '14px',
-  fontWeight: 500,
-  border: 'none',
-  cursor: 'pointer',
-  transition: 'opacity 0.15s',
-};
+const btnBase = 'py-2 px-[18px] rounded-md text-sm font-medium border-0 transition-opacity duration-150';
 
 export function InspectionControls({
   isAutoRunning,
@@ -28,18 +20,12 @@ export function InspectionControls({
   const allDisabled = isLoading;
 
   return (
-    <div style={{ marginBottom: '16px' }}>
-      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+    <div className="mb-4">
+      <div className="flex gap-2.5 flex-wrap">
         <button
           onClick={onManual}
           disabled={allDisabled || isAutoRunning}
-          style={{
-            ...btnBase,
-            backgroundColor: '#2563eb',
-            color: '#fff',
-            opacity: allDisabled || isAutoRunning ? 0.5 : 1,
-            cursor: allDisabled || isAutoRunning ? 'not-allowed' : 'pointer',
-          }}
+          className={`${btnBase} bg-blue-600 text-white ${allDisabled || isAutoRunning ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         >
           🔍 수동 검사 (1개 검사)
         </button>
@@ -47,13 +33,7 @@ export function InspectionControls({
         <button
           onClick={onStart}
           disabled={allDisabled || isAutoRunning}
-          style={{
-            ...btnBase,
-            backgroundColor: '#16a34a',
-            color: '#fff',
-            opacity: allDisabled || isAutoRunning ? 0.5 : 1,
-            cursor: allDisabled || isAutoRunning ? 'not-allowed' : 'pointer',
-          }}
+          className={`${btnBase} bg-green-600 text-white ${allDisabled || isAutoRunning ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         >
           ▶ 자동 검사 (3초마다 1개)
         </button>
@@ -61,27 +41,17 @@ export function InspectionControls({
         <button
           onClick={onStop}
           disabled={allDisabled || !isAutoRunning}
-          style={{
-            ...btnBase,
-            backgroundColor: '#dc2626',
-            color: '#fff',
-            opacity: allDisabled || !isAutoRunning ? 0.5 : 1,
-            cursor: allDisabled || !isAutoRunning ? 'not-allowed' : 'pointer',
-          }}
+          className={`${btnBase} bg-red-600 text-white ${allDisabled || !isAutoRunning ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
         >
           ⏹ 자동 검사 중지
         </button>
       </div>
 
       {isLoading && (
-        <p style={{ marginTop: '8px', color: '#6b7280', fontSize: '13px' }}>
-          ⏳ 검사 중... 잠시 기다려 주세요
-        </p>
+        <p className="mt-2 text-gray-500 text-[13px]">⏳ 검사 중... 잠시 기다려 주세요</p>
       )}
       {error && (
-        <p style={{ marginTop: '8px', color: '#dc2626', fontSize: '13px' }}>
-          {error}
-        </p>
+        <p className="mt-2 text-red-600 text-[13px]">{error}</p>
       )}
     </div>
   );

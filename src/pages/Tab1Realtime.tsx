@@ -43,13 +43,7 @@ export default function Tab1Realtime() {
         onStop={stop}
       />
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 2fr 2fr 2fr',
-          gap: '16px',
-        }}
-      >
+      <div className="grid grid-cols-[1fr_2fr_2fr_2fr] gap-4">
         <VerdictCard result={lastResult} />
         <ImagePanel url={imageUrl} label="원본 이미지" />
         <AnomalyMapPanel url={anomalyMapUrl} />
@@ -67,20 +61,7 @@ export default function Tab1Realtime() {
       )}
 
       {reshuffledToast && (
-        <div
-          style={{
-            position: 'fixed',
-            bottom: '24px',
-            right: '24px',
-            padding: '12px 20px',
-            backgroundColor: '#1e293b',
-            color: '#fff',
-            borderRadius: '8px',
-            fontSize: '13px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-            zIndex: 999,
-          }}
-        >
+        <div className="fixed bottom-6 right-6 py-3 px-5 bg-slate-800 text-white rounded-lg text-[13px] shadow-[0_4px_12px_rgba(0,0,0,0.15)] z-[999]">
           이미지 풀이 소진되어 재셔플되었습니다.
         </div>
       )}

@@ -11,17 +11,6 @@ interface Props {
 
 const UNITS = [20, 40, 100] as const;
 
-const unitBtnStyle = (active: boolean): React.CSSProperties => ({
-  padding: '5px 14px',
-  fontSize: '13px',
-  borderRadius: '6px',
-  border: `1px solid ${active ? '#2563eb' : '#d1d5db'}`,
-  backgroundColor: active ? '#2563eb' : '#fff',
-  color: active ? '#fff' : '#374151',
-  cursor: 'pointer',
-  fontWeight: active ? 600 : 400,
-});
-
 export function StatCharts({ allRecords, threshold }: Props) {
   const {
     selectedUnit,
@@ -35,31 +24,25 @@ export function StatCharts({ allRecords, threshold }: Props) {
   const selectedLabel = groups[selectedGroupIndex]?.label ?? '';
 
   return (
-    <div style={{ marginTop: '24px' }}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          marginBottom: '16px',
-        }}
-      >
-        <span style={{ fontSize: '13px', color: '#6b7280', marginRight: '4px' }}>단위:</span>
+    <div className="mt-6">
+      <div className="flex items-center gap-2 mb-4">
+        <span className="text-[13px] text-gray-500 mr-1">단위:</span>
         {UNITS.map((u) => (
-          <button key={u} onClick={() => setUnit(u)} style={unitBtnStyle(selectedUnit === u)}>
+          <button
+            key={u}
+            onClick={() => setUnit(u)}
+            className={`py-[5px] px-3.5 text-[13px] rounded-md border cursor-pointer ${
+              selectedUnit === u
+                ? 'border-blue-600 bg-blue-600 text-white font-semibold'
+                : 'border-gray-300 bg-white text-gray-700 font-normal'
+            }`}
+          >
             {u}개
           </button>
         ))}
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 2fr 2fr',
-          gap: '16px',
-          alignItems: 'start',
-        }}
-      >
+      <div className="grid grid-cols-[1fr_2fr_2fr] gap-4 items-start">
         <TimeRangeTable
           groups={groups}
           selectedGroupIndex={selectedGroupIndex}

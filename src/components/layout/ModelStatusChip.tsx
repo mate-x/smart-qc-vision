@@ -3,26 +3,19 @@ import { useInspectionStore } from '../../store/inspectionStore';
 export function ModelStatusChip() {
   const activeModel = useInspectionStore((s) => s.activeModel);
 
-  const style: React.CSSProperties = {
-    display: 'inline-flex',
-    alignItems: 'center',
-    padding: '4px 10px',
-    borderRadius: '12px',
-    fontSize: '12px',
-    fontWeight: 500,
-    whiteSpace: 'nowrap',
-    backgroundColor: activeModel ? '#e0f2e9' : '#f0f0f0',
-    color: activeModel ? '#166534' : '#6b7280',
-    border: `1px solid ${activeModel ? '#bbf7d0' : '#d1d5db'}`,
-  };
+  const chipClass = `inline-flex items-center px-2.5 py-1 rounded-xl text-xs font-medium whitespace-nowrap border ${
+    activeModel
+      ? 'bg-green-100 text-green-800 border-green-200'
+      : 'bg-gray-100 text-gray-500 border-gray-300'
+  }`;
 
   if (!activeModel) {
-    return <span style={style}>모델 미선택</span>;
+    return <span className={chipClass}>모델 미선택</span>;
   }
 
   const shortId = activeModel.experiment_id.slice(0, 8);
   return (
-    <span style={style}>
+    <span className={chipClass}>
       모델: {activeModel.model_type} / {shortId}
     </span>
   );

@@ -3,63 +3,21 @@ interface Props {
   onCancel: () => void;
 }
 
-const btnBase: React.CSSProperties = {
-  padding: '8px 20px',
-  borderRadius: '6px',
-  fontSize: '14px',
-  fontWeight: 500,
-  border: 'none',
-  cursor: 'pointer',
-};
+const btnBase = 'py-2 px-5 rounded-md text-sm font-medium border-0 cursor-pointer';
 
 export function ClearHistoryDialog({ onConfirm, onCancel }: Props) {
   return (
-    <div
-      style={{
-        position: 'fixed',
-        inset: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: '#fff',
-          borderRadius: '12px',
-          width: '380px',
-          boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
-          overflow: 'hidden',
-        }}
-      >
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #e5e7eb' }}>
-          <p style={{ fontSize: '15px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>
-            이력 초기화
-          </p>
-          <p style={{ fontSize: '14px', color: '#6b7280' }}>
-            이력을 초기화하면 모든 검사 기록이 삭제됩니다.
-          </p>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[1000]">
+      <div className="bg-white rounded-xl w-[380px] shadow-[0_20px_40px_rgba(0,0,0,0.2)] overflow-hidden">
+        <div className="py-5 px-6 border-b border-gray-200">
+          <p className="text-[15px] font-semibold text-gray-900 mb-2">이력 초기화</p>
+          <p className="text-sm text-gray-500">이력을 초기화하면 모든 검사 기록이 삭제됩니다.</p>
         </div>
-        <div
-          style={{
-            padding: '16px 24px',
-            display: 'flex',
-            gap: '10px',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <button
-            onClick={onCancel}
-            style={{ ...btnBase, backgroundColor: '#f3f4f6', color: '#374151' }}
-          >
+        <div className="py-4 px-6 flex gap-2.5 justify-end">
+          <button onClick={onCancel} className={`${btnBase} bg-gray-100 text-gray-700`}>
             취소
           </button>
-          <button
-            onClick={onConfirm}
-            style={{ ...btnBase, backgroundColor: '#dc2626', color: '#fff' }}
-          >
+          <button onClick={onConfirm} className={`${btnBase} bg-red-600 text-white`}>
             초기화
           </button>
         </div>

@@ -13,26 +13,13 @@ export function ApplyModelButton({
   error,
   onApply,
 }: Props) {
-  const isDisabled =
-    !selectedId || selectedId === activeModelId || isLoading;
-
-  const showWarning =
-    selectedId !== null && selectedId !== activeModelId && !isLoading;
+  const isDisabled = !selectedId || selectedId === activeModelId || isLoading;
+  const showWarning = selectedId !== null && selectedId !== activeModelId && !isLoading;
 
   return (
     <div>
       {showWarning && (
-        <p
-          style={{
-            fontSize: '13px',
-            color: '#92400e',
-            backgroundColor: '#fef9c3',
-            border: '1px solid #fde047',
-            borderRadius: '6px',
-            padding: '8px 12px',
-            marginBottom: '12px',
-          }}
-        >
+        <p className="text-[13px] text-amber-800 bg-yellow-100 border border-yellow-300 rounded-md px-3 py-2 mb-3">
           ⚠️ 모델을 교체하면 현재 세션의 모든 검사 이력이 삭제됩니다.
         </p>
       )}
@@ -40,25 +27,17 @@ export function ApplyModelButton({
       <button
         onClick={onApply}
         disabled={isDisabled}
-        style={{
-          padding: '10px 24px',
-          borderRadius: '6px',
-          fontSize: '14px',
-          fontWeight: 600,
-          border: 'none',
-          cursor: isDisabled ? 'not-allowed' : 'pointer',
-          backgroundColor: isDisabled ? '#e5e7eb' : '#2563eb',
-          color: isDisabled ? '#9ca3af' : '#fff',
-          transition: 'background-color 0.15s',
-        }}
+        className={`py-2.5 px-6 rounded-md text-sm font-semibold border-0 transition-colors duration-150 ${
+          isDisabled
+            ? 'cursor-not-allowed bg-gray-200 text-gray-400'
+            : 'cursor-pointer bg-blue-600 text-white'
+        }`}
       >
         {isLoading ? '적용 중...' : '모델 적용'}
       </button>
 
       {error && (
-        <p style={{ marginTop: '8px', color: '#dc2626', fontSize: '13px' }}>
-          {error}
-        </p>
+        <p className="mt-2 text-red-600 text-[13px]">{error}</p>
       )}
     </div>
   );

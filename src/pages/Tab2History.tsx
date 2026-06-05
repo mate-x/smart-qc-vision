@@ -31,29 +31,16 @@ export default function Tab2History() {
 
   return (
     <NoModelGuard>
-      {/* 헤더 행 */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: '12px',
-        }}
-      >
-        <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#111827' }}>검사 이력</h2>
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-lg font-bold text-gray-900">검사 이력</h2>
         <button
           onClick={downloadCsv}
           disabled={allRecords.length === 0}
-          style={{
-            padding: '7px 16px',
-            borderRadius: '6px',
-            fontSize: '13px',
-            fontWeight: 500,
-            border: '1px solid #d1d5db',
-            backgroundColor: allRecords.length === 0 ? '#f9fafb' : '#fff',
-            color: allRecords.length === 0 ? '#9ca3af' : '#374151',
-            cursor: allRecords.length === 0 ? 'not-allowed' : 'pointer',
-          }}
+          className={`py-[7px] px-4 rounded-md text-[13px] font-medium border border-gray-300 ${
+            allRecords.length === 0
+              ? 'bg-gray-50 text-gray-400 cursor-not-allowed'
+              : 'bg-white text-gray-700 cursor-pointer'
+          }`}
         >
           📥 CSV 내보내기
         </button>
@@ -67,20 +54,10 @@ export default function Tab2History() {
 
       <StatCharts allRecords={allRecords} threshold={threshold} />
 
-      {/* 이력 초기화 버튼 */}
-      <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'flex-end' }}>
+      <div className="mt-6 flex justify-end">
         <button
           onClick={() => setShowClearDialog(true)}
-          style={{
-            padding: '8px 16px',
-            borderRadius: '6px',
-            fontSize: '13px',
-            fontWeight: 500,
-            border: '1px solid #fca5a5',
-            backgroundColor: '#fff1f2',
-            color: '#dc2626',
-            cursor: 'pointer',
-          }}
+          className="py-2 px-4 rounded-md text-[13px] font-medium border border-red-300 bg-red-50 text-red-600 cursor-pointer"
         >
           🗑 이력 초기화
         </button>

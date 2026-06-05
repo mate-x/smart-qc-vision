@@ -7,73 +7,49 @@ interface Props {
   onClick: () => void;
 }
 
-const tdStyle: React.CSSProperties = {
-  padding: '10px 12px',
-  fontSize: '13px',
-  borderBottom: '1px solid #f3f4f6',
-  verticalAlign: 'middle',
-};
+const tdClass = 'py-2.5 px-3 text-[13px] border-b border-gray-100 align-middle';
 
 export function ModelRow({ model, isActive, isSelected, onClick }: Props) {
   return (
     <tr
       onClick={onClick}
-      style={{
-        cursor: 'pointer',
-        backgroundColor: isSelected ? '#eff6ff' : '#fff',
-        borderLeft: `3px solid ${isSelected ? '#2563eb' : 'transparent'}`,
-        outline: 'none',
-      }}
+      className={`cursor-pointer outline-none border-l-[3px] ${
+        isSelected
+          ? 'bg-blue-50 border-l-blue-600'
+          : 'bg-white border-l-transparent'
+      }`}
     >
-      <td style={{ ...tdStyle, textAlign: 'center', width: '40px' }}>
+      <td className={`${tdClass} text-center w-10`}>
         <input
           type="radio"
           name="model-select"
           checked={isSelected}
           onChange={onClick}
-          style={{ cursor: 'pointer', accentColor: '#2563eb', width: '16px', height: '16px' }}
+          className="cursor-pointer accent-blue-600 w-4 h-4"
         />
       </td>
-      <td style={tdStyle}>
-        <span style={{ color: '#111827', fontWeight: isSelected ? 600 : 400, marginRight: '6px' }}>
+      <td className={tdClass}>
+        <span className={`mr-1.5 text-gray-900 ${isSelected ? 'font-semibold' : 'font-normal'}`}>
           {model.name ?? model.experiment_id}
         </span>
         {isActive && (
-          <span
-            style={{
-              padding: '1px 6px',
-              borderRadius: '10px',
-              backgroundColor: '#dcfce7',
-              color: '#166534',
-              fontSize: '11px',
-              fontWeight: 600,
-              whiteSpace: 'nowrap',
-            }}
-          >
+          <span className="py-px px-1.5 rounded-[10px] bg-green-100 text-green-800 text-[11px] font-semibold whitespace-nowrap">
             적용됨
           </span>
         )}
       </td>
-      <td style={tdStyle}>
-        <span
-          style={{
-            padding: '2px 8px',
-            borderRadius: '4px',
-            backgroundColor: '#f1f5f9',
-            fontSize: '12px',
-            color: '#475569',
-          }}
-        >
+      <td className={tdClass}>
+        <span className="py-0.5 px-2 rounded bg-slate-100 text-xs text-slate-600">
           {model.model_type}
         </span>
       </td>
-      <td style={{ ...tdStyle, fontFamily: 'monospace' }}>
+      <td className={`${tdClass} font-mono`}>
         {model.metrics.f1_score.toFixed(4)}
       </td>
-      <td style={{ ...tdStyle, fontFamily: 'monospace' }}>
+      <td className={`${tdClass} font-mono`}>
         {model.metrics.auc.toFixed(4)}
       </td>
-      <td style={{ ...tdStyle, color: '#6b7280' }}>
+      <td className={`${tdClass} text-gray-500`}>
         {model.created_at.slice(0, 16)}
       </td>
     </tr>

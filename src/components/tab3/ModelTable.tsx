@@ -9,16 +9,7 @@ interface Props {
   onSelect: (id: string) => void;
 }
 
-const thStyle: React.CSSProperties = {
-  padding: '10px 12px',
-  fontSize: '13px',
-  fontWeight: 600,
-  color: '#374151',
-  textAlign: 'left',
-  borderBottom: '2px solid #e5e7eb',
-  backgroundColor: '#f8fafc',
-  whiteSpace: 'nowrap',
-};
+const thClass = 'py-2.5 px-3 text-[13px] font-semibold text-gray-700 text-left border-b-2 border-gray-200 bg-slate-50 whitespace-nowrap';
 
 export function ModelTable({
   models,
@@ -28,41 +19,28 @@ export function ModelTable({
   onSelect,
 }: Props) {
   return (
-    <div
-      style={{
-        border: '1px solid #e2e8f0',
-        borderRadius: '8px',
-        overflow: 'hidden',
-        marginBottom: '20px',
-      }}
-    >
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+    <div className="border border-slate-200 rounded-lg overflow-hidden mb-5">
+      <table className="w-full border-collapse">
         <thead>
           <tr>
-            <th style={{ ...thStyle, textAlign: 'center', width: '40px' }}></th>
-            <th style={thStyle}>실험명</th>
-            <th style={thStyle}>모델타입</th>
-            <th style={thStyle}>F1</th>
-            <th style={thStyle}>AUC</th>
-            <th style={thStyle}>실행시각</th>
+            <th className={`${thClass} text-center w-10`}></th>
+            <th className={thClass}>실험명</th>
+            <th className={thClass}>모델타입</th>
+            <th className={thClass}>F1</th>
+            <th className={thClass}>AUC</th>
+            <th className={thClass}>실행시각</th>
           </tr>
         </thead>
         <tbody>
           {isLoading ? (
             <tr>
-              <td
-                colSpan={6}
-                style={{ padding: '32px', textAlign: 'center', color: '#9ca3af' }}
-              >
+              <td colSpan={6} className="p-8 text-center text-gray-400">
                 로딩 중...
               </td>
             </tr>
           ) : models.length === 0 ? (
             <tr>
-              <td
-                colSpan={6}
-                style={{ padding: '32px', textAlign: 'center', color: '#9ca3af' }}
-              >
+              <td colSpan={6} className="p-8 text-center text-gray-400">
                 사용 가능한 완료된 실험이 없습니다.
               </td>
             </tr>

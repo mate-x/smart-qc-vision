@@ -7,30 +7,11 @@ export function GpuWarningBanner() {
   if (!gpuWarning) return null;
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '10px 24px',
-        backgroundColor: '#fef9c3',
-        borderBottom: '1px solid #fde047',
-        color: '#713f12',
-        fontSize: '13px',
-      }}
-    >
+    <div className="flex items-center justify-between px-6 py-2.5 bg-yellow-100 border-b border-yellow-300 text-yellow-900 text-[13px]">
       <span>⚠️ {gpuWarning}</span>
       <button
         onClick={() => setGpuWarning(null)}
-        style={{
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          fontSize: '16px',
-          color: '#713f12',
-          lineHeight: 1,
-          padding: '0 4px',
-        }}
+        className="bg-transparent border-0 cursor-pointer text-base text-yellow-900 leading-none px-1"
         aria-label="배너 닫기"
       >
         ×

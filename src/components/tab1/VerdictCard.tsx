@@ -4,33 +4,13 @@ interface Props {
   result: InspectionResult | null;
 }
 
-export function VerdictCard({ result }: Props) {
-  const containerStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    minHeight: '280px',
-    borderRadius: '8px',
-    border: '1px solid',
-    padding: '24px 12px',
-    gap: '8px',
-  };
+const baseClass = 'flex flex-col items-center justify-center h-full min-h-[280px] rounded-lg border py-6 px-3 gap-2';
 
+export function VerdictCard({ result }: Props) {
   if (!result) {
     return (
-      <div
-        style={{
-          ...containerStyle,
-          backgroundColor: '#f8fafc',
-          borderColor: '#e2e8f0',
-          color: '#9ca3af',
-        }}
-      >
-        <p style={{ fontSize: '13px', textAlign: 'center' }}>
-          검사 버튼을 눌러 시작하세요.
-        </p>
+      <div className={`${baseClass} bg-slate-50 border-slate-200 text-gray-400`}>
+        <p className="text-[13px] text-center">검사 버튼을 눌러 시작하세요.</p>
       </div>
     );
   }
@@ -38,34 +18,14 @@ export function VerdictCard({ result }: Props) {
   const isGood = result.verdict === '양품';
 
   return (
-    <div
-      style={{
-        ...containerStyle,
-        backgroundColor: isGood ? '#f0fdf4' : '#fff1f2',
-        borderColor: isGood ? '#86efac' : '#fca5a5',
-      }}
-    >
-      <span style={{ fontSize: '40px' }}>{isGood ? '✅' : '❌'}</span>
-      <span
-        style={{
-          fontSize: '22px',
-          fontWeight: 700,
-          color: isGood ? '#166534' : '#991b1b',
-        }}
-      >
+    <div className={`${baseClass} ${isGood ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'}`}>
+      <span className="text-[40px]">{isGood ? '✅' : '❌'}</span>
+      <span className={`text-[22px] font-bold ${isGood ? 'text-green-800' : 'text-red-800'}`}>
         {result.verdict}
       </span>
-      <div style={{ marginTop: '12px', textAlign: 'center' }}>
-        <p style={{ fontSize: '11px', color: '#6b7280', marginBottom: '4px' }}>
-          Anomaly Score
-        </p>
-        <p
-          style={{
-            fontSize: '20px',
-            fontWeight: 600,
-            color: isGood ? '#166534' : '#991b1b',
-          }}
-        >
+      <div className="mt-3 text-center">
+        <p className="text-[11px] text-gray-500 mb-1">Anomaly Score</p>
+        <p className={`text-xl font-semibold ${isGood ? 'text-green-800' : 'text-red-800'}`}>
           {result.anomaly_score.toFixed(4)}
         </p>
       </div>

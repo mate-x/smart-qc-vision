@@ -4,33 +4,20 @@ interface Props {
   record: InspectionRecord;
 }
 
-const tdStyle: React.CSSProperties = {
-  padding: '8px 12px',
-  fontSize: '13px',
-  borderBottom: '1px solid #e5e7eb',
-};
+const tdClass = 'py-2 px-3 text-[13px] border-b border-gray-200';
 
 export function RecordRow({ record }: Props) {
   const isGood = record.verdict === '양품';
-  const rowBg = isGood ? '#D6F5DD' : '#FFDDD6';
 
   return (
-    <tr style={{ backgroundColor: rowBg }}>
-      <td style={tdStyle}>{record.seq}</td>
-      <td style={tdStyle}>{record.inspected_at}</td>
-      <td style={{ ...tdStyle, maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-        {record.image_name}
-      </td>
-      <td
-        style={{
-          ...tdStyle,
-          fontWeight: 600,
-          color: isGood ? '#166534' : '#991b1b',
-        }}
-      >
+    <tr className={isGood ? 'bg-[#D6F5DD]' : 'bg-[#FFDDD6]'}>
+      <td className={tdClass}>{record.seq}</td>
+      <td className={tdClass}>{record.inspected_at}</td>
+      <td className={`${tdClass} truncate max-w-[200px]`}>{record.image_name}</td>
+      <td className={`${tdClass} font-semibold ${isGood ? 'text-green-800' : 'text-red-800'}`}>
         {record.verdict}
       </td>
-      <td style={{ ...tdStyle, fontFamily: 'monospace' }}>
+      <td className={`${tdClass} font-mono`}>
         {record.anomaly_score.toFixed(4)}
       </td>
     </tr>

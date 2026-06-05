@@ -38,30 +38,9 @@ export function ScoreHistogram({ records, threshold, title }: Props) {
 
   return (
     <div>
-      <p
-        style={{
-          fontSize: '13px',
-          fontWeight: 600,
-          color: '#374151',
-          marginBottom: '8px',
-          textAlign: 'center',
-        }}
-      >
-        {title}
-      </p>
+      <p className="text-[13px] font-semibold text-gray-700 mb-2 text-center">{title}</p>
       {records.length === 0 ? (
-        <div
-          style={{
-            height: 240,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#9ca3af',
-            fontSize: '13px',
-            border: '1px solid #e2e8f0',
-            borderRadius: '8px',
-          }}
-        >
+        <div className="h-[240px] flex items-center justify-center text-gray-400 text-[13px] border border-slate-200 rounded-lg">
           데이터 없음
         </div>
       ) : (

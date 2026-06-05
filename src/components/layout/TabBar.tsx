@@ -11,34 +11,19 @@ export function TabBar() {
   const { pathname } = useLocation();
 
   return (
-    <nav
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 24px',
-        height: '52px',
-        backgroundColor: '#1e293b',
-        flexShrink: 0,
-      }}
-    >
-      <div style={{ display: 'flex', gap: '4px' }}>
+    <nav className="flex items-center justify-between px-6 h-13 bg-slate-800 shrink-0">
+      <div className="flex gap-1">
         {TABS.map(({ path, label }) => {
           const isActive = pathname === path;
           return (
             <Link
               key={path}
               to={path}
-              style={{
-                padding: '6px 16px',
-                borderRadius: '6px',
-                fontSize: '14px',
-                fontWeight: isActive ? 600 : 400,
-                color: isActive ? '#ffffff' : '#94a3b8',
-                backgroundColor: isActive ? '#334155' : 'transparent',
-                textDecoration: 'none',
-                transition: 'background-color 0.15s, color 0.15s',
-              }}
+              className={`py-1.5 px-4 rounded-md text-sm no-underline transition-colors duration-150 ${
+                isActive
+                  ? 'font-semibold text-white bg-slate-700'
+                  : 'font-normal text-slate-400 bg-transparent'
+              }`}
             >
               {label}
             </Link>

@@ -6,68 +6,26 @@ interface Props {
   onSelect: (index: number) => void;
 }
 
+const thBase = 'py-2 px-3 text-xs font-semibold text-gray-700 border-b-2 border-gray-200 bg-slate-50 sticky top-0';
+const tdBase = 'py-2 px-3 text-xs text-gray-700 border-b border-gray-100';
+
 export function TimeRangeTable({ groups, selectedGroupIndex, onSelect }: Props) {
   if (groups.length === 0) {
     return (
-      <div
-        style={{
-          padding: '24px',
-          textAlign: 'center',
-          color: '#9ca3af',
-          fontSize: '13px',
-          border: '1px solid #e2e8f0',
-          borderRadius: '8px',
-          backgroundColor: '#f8fafc',
-        }}
-      >
+      <div className="p-6 text-center text-gray-400 text-[13px] border border-slate-200 rounded-lg bg-slate-50">
         데이터 없음
       </div>
     );
   }
 
   return (
-    <div
-      style={{
-        border: '1px solid #e2e8f0',
-        borderRadius: '8px',
-        overflow: 'hidden',
-        height: '100%',
-      }}
-    >
-      <div style={{ overflowY: 'auto', maxHeight: '300px' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+    <div className="border border-slate-200 rounded-lg overflow-hidden h-full">
+      <div className="overflow-y-auto max-h-[300px]">
+        <table className="w-full border-collapse">
           <thead>
             <tr>
-              <th
-                style={{
-                  padding: '8px 12px',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  color: '#374151',
-                  textAlign: 'left',
-                  borderBottom: '2px solid #e5e7eb',
-                  backgroundColor: '#f8fafc',
-                  position: 'sticky',
-                  top: 0,
-                }}
-              >
-                시간 범위
-              </th>
-              <th
-                style={{
-                  padding: '8px 12px',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  color: '#374151',
-                  textAlign: 'right',
-                  borderBottom: '2px solid #e5e7eb',
-                  backgroundColor: '#f8fafc',
-                  position: 'sticky',
-                  top: 0,
-                }}
-              >
-                건수
-              </th>
+              <th className={`${thBase} text-left`}>시간 범위</th>
+              <th className={`${thBase} text-right`}>건수</th>
             </tr>
           </thead>
           <tbody>
@@ -77,38 +35,17 @@ export function TimeRangeTable({ groups, selectedGroupIndex, onSelect }: Props) 
                 <tr
                   key={g.index}
                   onClick={() => onSelect(g.index)}
-                  style={{
-                    cursor: 'pointer',
-                    backgroundColor: isSelected ? '#eff6ff' : '#fff',
-                    borderLeft: isSelected ? '3px solid #2563eb' : '3px solid transparent',
-                  }}
+                  className={`cursor-pointer border-l-[3px] ${
+                    isSelected ? 'bg-blue-50 border-l-blue-600' : 'bg-white border-l-transparent'
+                  }`}
                 >
-                  <td
-                    style={{
-                      padding: '8px 12px',
-                      fontSize: '12px',
-                      color: '#374151',
-                      borderBottom: '1px solid #f3f4f6',
-                    }}
-                  >
+                  <td className={tdBase}>
                     {g.label}
                     {g.isPartial && (
-                      <span style={{ marginLeft: '4px', color: '#9ca3af', fontSize: '11px' }}>
-                        (진행)
-                      </span>
+                      <span className="ml-1 text-gray-400 text-[11px]">(진행)</span>
                     )}
                   </td>
-                  <td
-                    style={{
-                      padding: '8px 12px',
-                      fontSize: '12px',
-                      color: '#374151',
-                      textAlign: 'right',
-                      borderBottom: '1px solid #f3f4f6',
-                    }}
-                  >
-                    {g.records.length}
-                  </td>
+                  <td className={`${tdBase} text-right`}>{g.records.length}</td>
                 </tr>
               );
             })}
