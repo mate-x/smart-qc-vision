@@ -7,9 +7,11 @@ export const modelsApi = {
     return apiClient.get<ExperimentRecord[]>('/api/models').then((r) => r.data);
   },
 
-  applyModel(experimentId: string): Promise<ApplyModelResponse> {
+  applyModel(experimentId: string, sourcePath?: string): Promise<ApplyModelResponse> {
+    const body: Record<string, string> = { experiment_id: experimentId };
+    if (sourcePath && sourcePath.trim()) body.source_path = sourcePath.trim();
     return apiClient
-      .post<ApplyModelResponse>('/api/inspection/model', { experiment_id: experimentId })
+      .post<ApplyModelResponse>('/api/inspection/model', body)
       .then((r) => r.data);
   },
 

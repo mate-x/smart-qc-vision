@@ -7,11 +7,11 @@ export function useApplyModel() {
   const [error, setError] = useState<string | null>(null);
   const setActiveModel = useInspectionStore((s) => s.setActiveModel);
 
-  const apply = useCallback(async (experimentId: string) => {
+  const apply = useCallback(async (experimentId: string, sourcePath?: string) => {
     setIsLoading(true);
     setError(null);
     try {
-      const res = await modelsApi.applyModel(experimentId);
+      const res = await modelsApi.applyModel(experimentId, sourcePath);
       setActiveModel(res.active_model, res.gpu_warning);
     } catch (e: unknown) {
       const msg =
