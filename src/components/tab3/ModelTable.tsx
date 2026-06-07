@@ -25,6 +25,7 @@ export function ModelTable({
           <tr>
             <th className={`${thClass} text-center w-10`}></th>
             <th className={thClass}>실험명</th>
+            <th className={thClass}>검사 제품</th>
             <th className={thClass}>모델타입</th>
             <th className={thClass}>F1</th>
             <th className={thClass}>AUC</th>
@@ -34,13 +35,13 @@ export function ModelTable({
         <tbody>
           {isLoading ? (
             <tr>
-              <td colSpan={6} className="p-8 text-center text-gray-400">
+              <td colSpan={7} className="p-8 text-center text-gray-400">
                 로딩 중...
               </td>
             </tr>
           ) : models.length === 0 ? (
             <tr>
-              <td colSpan={6} className="p-8 text-center text-gray-400">
+              <td colSpan={7} className="p-8 text-center text-gray-400">
                 사용 가능한 완료된 실험이 없습니다.
               </td>
             </tr>

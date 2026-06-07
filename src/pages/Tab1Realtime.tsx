@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useInspectionStore } from '../store/inspectionStore';
 import { useManualInspection } from '../hooks/useManualInspection';
 import { useAutoInspection } from '../hooks/useAutoInspection';
+import { useDefectOnlyInspection } from '../hooks/useDefectOnlyInspection';
 import { useInspectionImages } from '../hooks/useInspectionImages';
 import { NoModelGuard } from '../components/layout/NoModelGuard';
 import { AutoRunningBanner } from '../components/tab1/AutoRunningBanner';
@@ -13,6 +14,7 @@ import { DefectPopup } from '../components/tab1/DefectPopup';
 
 export default function Tab1Realtime() {
   const { run: runManual, isLoading: isManualLoading, error: manualError } = useManualInspection();
+  const { run: runDefectOnly, isLoading: isDefectOnlyLoading, error: defectOnlyError, warning: defectOnlyWarning, clearError: clearDefectOnlyError } = useDefectOnlyInspection();
   const { start, stop } = useAutoInspection();
   const { imageUrl, anomalyMapUrl, overlayUrl } = useInspectionImages();
 
@@ -35,6 +37,11 @@ export default function Tab1Realtime() {
     return () => clearTimeout(timer);
   }, [reshuffledToast, dismissReshuffledToast]);
 
+  const handleManual = () => {
+    clearDefectOnlyError();
+    runManual();
+  };
+
   return (
     <NoModelGuard>
       <div className="flex flex-col h-full">
@@ -44,10 +51,12 @@ export default function Tab1Realtime() {
           <InspectionControls
             isAutoRunning={isAutoRunning}
             isLoading={isManualLoading}
-            error={manualError}
-            onManual={runManual}
+            isDefectOnlyLoading={isDefectOnlyLoading}
+            error={manualError ?? defectOnlyError}
+            onManual={handleManual}
             onStart={start}
             onStop={stop}
+            onDefectOnly={runDefectOnly}
           />
           {lastResult && (
             <div className={`flex items-center gap-2.5 px-4 py-2 rounded-full text-base font-bold shrink-0 border ${
@@ -82,6 +91,12 @@ export default function Tab1Realtime() {
       {reshuffledToast && (
         <div className="fixed bottom-6 right-6 py-3 px-5 bg-slate-800 text-white rounded-lg text-[13px] shadow-[0_4px_12px_rgba(0,0,0,0.15)] z-[999]">
           이미지 풀이 소진되어 재셔플되었습니다.
+        </div>
+      )}
+
+      {defectOnlyWarning && (
+        <div className="fixed bottom-6 right-6 py-3 px-5 bg-amber-500 text-white rounded-lg text-[13px] shadow-[0_4px_12px_rgba(0,0,0,0.15)] z-[999]">
+          {defectOnlyWarning}
         </div>
       )}
     </NoModelGuard>

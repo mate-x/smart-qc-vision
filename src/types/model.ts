@@ -2,6 +2,8 @@ export interface ExperimentRecord {
   experiment_id: string;
   name?: string;
   model_type: string;
+  product_name: string;
+  background_method: string;
   model_path: string;
   dataset_path: string;
   created_at: string;
@@ -24,6 +26,8 @@ export interface ActiveModel {
   name: string;
   model_path: string;
   model_type: string;
+  product_name: string;
+  background_method: string;
   threshold: number;
   dataset_path: string;
   preprocessing_config: {

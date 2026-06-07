@@ -39,6 +39,9 @@ export function ModelRow({ model, isActive, isSelected, onClick }: Props) {
         )}
       </td>
       <td className={tdClass}>
+        {model.product_name || '(입력 없음)'}
+      </td>
+      <td className={tdClass}>
         <span className="py-0.5 px-2 rounded bg-slate-100 text-xs text-slate-600">
           {model.model_type}
         </span>

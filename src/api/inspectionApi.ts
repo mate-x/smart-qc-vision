@@ -1,9 +1,9 @@
 import { apiClient } from './client';
-import type { InspectionJobStarted, InspectionJobStatus } from '../types/inspection';
+import type { InspectionJobStarted, InspectionJobStatus, RunInspectionRequest } from '../types/inspection';
 
 export const inspectionApi = {
-  startInspection(): Promise<InspectionJobStarted> {
-    return apiClient.post<InspectionJobStarted>('/api/inspection/run').then((r) => r.data);
+  startInspection(req: RunInspectionRequest = {}): Promise<InspectionJobStarted> {
+    return apiClient.post<InspectionJobStarted>('/api/inspection/run', req).then((r) => r.data);
   },
 
   getJobStatus(jobId: string): Promise<InspectionJobStatus> {

@@ -22,6 +22,10 @@ export interface InspectionJobStarted {
   job_id: string;
 }
 
+export interface RunInspectionRequest {
+  defect_only?: boolean;
+}
+
 export type InspectionJobStatus =
   | { status: 'pending' | 'running' }
   | { status: 'completed'; result: InspectionResult }
