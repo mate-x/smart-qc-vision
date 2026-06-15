@@ -20,8 +20,9 @@ export function ModelTable({
 }: Props) {
   return (
     <div className="border border-slate-200 rounded-lg overflow-hidden mb-5">
+      <div className="overflow-y-auto max-h-[252px]">
       <table className="w-full border-collapse">
-        <thead>
+        <thead className="sticky top-0 z-10">
           <tr>
             <th className={`${thClass} text-center w-10`}></th>
             <th className={thClass}>실험명</th>
@@ -58,6 +59,7 @@ export function ModelTable({
           )}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }
